@@ -1,0 +1,36 @@
+# 日志与运行数据
+logs/
+*.log
+
+# 模型权重与数据
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.npz
+*.npy
+*.onnx
+*.h5
+*.hdf5
+*.zarr/
+data/
+datasets/
+
+# ROS2
+build/
+install/
+log/
+*.mcap
+*.db3
+*.bag
+
+# Python
+__pycache__/
+*.pyc
+.eggs/
+*.egg-info/
+
+# IDE/OS
+.vscode/
+.idea/
+.DS_Store

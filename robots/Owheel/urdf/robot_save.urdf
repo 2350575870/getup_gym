@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot
+  name="OwheelNT">
+  <link
+    name="torso">
+    <inertial>
+      <origin
+        xyz="0.03168 0.00287 0.04384"
+        rpy="0 0 0" />
+      <mass
+        value="14.79315" />
+      <inertia
+        ixx="0.26332"
+        ixy="-0.00171"
+        ixz="0.03811"
+        iyy="0.17454"
+        iyz="0.00243"
+        izz="0.15537" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/torso.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.08 0 0.08" rpy="0 0 0" />
+      <geometry>
+        <box size="0.14 0.30 0.25" />  
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="lhip">
+    <inertial>
+      <origin
+        xyz="-0.0127 0.0391 0"
+        rpy="0 0 0" />
+      <mass
+        value="1.728" />
+      <inertia
+        ixx="0.00287"
+        ixy="0.00091"
+        ixz="0.00000"
+        iyy="0.00457"
+        iyz="0.00000"
+        izz="0.00387" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/lhip.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.09 0 0" rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.05" radius="0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lhiproll"
+    type="revolute">
+    <origin
+      xyz="0.083 0.13 -0.11"
+      rpy="0 0 0" />
+    <parent
+      link="torso" />
+    <child
+      link="lhip" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.5236"
+      upper="0.7854"
+      effort="120"
+      velocity="15" />
+  </joint>
+  <link
+    name="lfem">
+    <inertial>
+      <origin
+        xyz="0.0043 -0.0260 -0.0531"
+        rpy="0 0 0" />
+      <mass
+        value="2.79" />
+      <inertia
+        ixx="0.0287"
+        ixy="0.0002"
+        ixz="-0.0010"
+        iyy="0.0292"
+        iyz="-0.0030"
+        izz="0.0043" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/lfem.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.14" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.15" radius="0.035" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lfempitch"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="lhip" />
+    <child
+      link="lfem" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-0.4363"
+      upper="2.0"
+      effort="120"
+      velocity="15" />
+    <!-- <limit
+      lower="-0.4363"
+      upper="2.0071"
+      effort="120"
+      velocity="15" /> -->
+  </joint>
+  <link
+    name="ltib">
+    <inertial>
+      <origin
+        xyz="0.00222 -0.00447 -0.23795"
+        rpy="0 0 0" />
+      <mass
+        value="1.05" />
+      <inertia
+        ixx="0.01278"
+        ixy="0.00001"
+        ixz="0.00034"
+        iyy="0.01305"
+        iyz="0.00029"
+        izz="0.00079" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/ltib.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.12" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.26" radius="0.015" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="ltibpitch"
+    type="revolute">
+    <origin
+      xyz="0 -0.006 -0.3"
+      rpy="0 0 0" />
+    <parent
+      link="lfem" />
+    <child
+      link="ltib" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.1"
+      upper="0.0873"
+      effort="120"
+      velocity="15" />
+    <!-- <limit
+      lower="-2.1"
+      upper="0.0873"
+      effort="120"
+      velocity="15" /> -->
+  </joint>
+  <link
+    name="lwheel">
+    <inertial>
+      <origin
+        xyz="0.0 0.036 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.87" />
+      <inertia
+        ixx="0.00566"
+        ixy="0.00000"
+        ixz="0.00000"
+        iyy="0.01102"
+        iyz="0.00000"
+        izz="0.00566" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/lwheel.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0.01 0" />
+      <geometry>
+        <cylinder length="0.018" radius="0.15" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lwheelrot"
+    type="revolute">
+    <origin
+      xyz="0 0.0205 -0.3"
+      rpy="0 0 0" />
+    <parent
+      link="ltib" />
+    <child
+      link="lwheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="40"
+      velocity="25" />
+  </joint>
+  <link
+    name="rhip">
+    <inertial>
+      <origin
+        xyz="-0.0127 -0.0391 0"
+        rpy="0 0 0" />
+      <mass
+        value="1.728" />
+      <inertia
+        ixx="0.00287"
+        ixy="-0.00091"
+        ixz="0.00000"
+        iyy="0.00457"
+        iyz="0.00000"
+        izz="0.00387" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/rhip.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.09 0 0" rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.05" radius="0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rhiproll"
+    type="revolute">
+    <origin
+      xyz="0.083 -0.13 -0.11"
+      rpy="0 0 0" />
+    <parent
+      link="torso" />
+    <child
+      link="rhip" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.7854"
+      upper="0.5236"
+      effort="120"
+      velocity="15" />
+  </joint>
+  <link
+    name="rfem">
+    <inertial>
+      <origin
+        xyz="0.0043 0.0260 -0.0531"
+        rpy="0 0 0" />
+      <mass
+        value="2.79" />
+      <inertia
+        ixx="0.0287"
+        ixy="-0.0002"
+        ixz="-0.0010"
+        iyy="0.0292"
+        iyz="0.0030"
+        izz="0.0043" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/rfem.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.14" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.15" radius="0.035" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rfempitch"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="rhip" />
+    <child
+      link="rfem" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-0.4363"
+      upper="2.0"
+      effort="120"
+      velocity="15" />
+  </joint>
+  <link
+    name="rtib">
+    <inertial>
+      <origin
+        xyz="0.00222 0.00447 -0.23795"
+        rpy="0 0 0" />
+      <mass
+        value="1.05" />
+      <inertia
+        ixx="0.01278"
+        ixy="-0.00001"
+        ixz="0.00034"
+        iyy="0.01305"
+        iyz="-0.00029"
+        izz="0.00079" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/rtib.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.12" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.26" radius="0.015" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rtibpitch"
+    type="revolute">
+    <origin
+      xyz="0 0.006 -0.3"
+      rpy="0 0 0" />
+    <parent
+      link="rfem" />
+    <child
+      link="rtib" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.1"
+      upper="0.0873"
+      effort="120"
+      velocity="15" />
+  </joint>
+  <link
+    name="rwheel">
+    <inertial>
+      <origin
+        xyz="0 -0.036 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.87" />
+      <inertia
+        ixx="0.00566"
+        ixy="0.00000"
+        ixz="0.00000"
+        iyy="0.01102"
+        iyz="0.00000"
+        izz="0.00566" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/rwheel.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 -0.01 0" />
+      <geometry>
+        <cylinder length="0.018" radius="0.15" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rwheelrot"
+    type="revolute">
+    <origin
+      xyz="0 -0.0205 -0.3"
+      rpy="0 0 0" />
+    <parent
+      link="rtib" />
+    <child
+      link="rwheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="40"
+      velocity="25" />
+  </joint>
+</robot>
