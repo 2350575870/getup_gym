@@ -5,7 +5,7 @@
 This repository contains the open-source implementation of the paper:
 > **Robust Fall Recovery for Armless Bipedal-Wheeled Robots via Force-Guided Learning**  
 > Haidong Hou, Zhangguo Yu, Tao Han, Hengbo Qi, Ghazal Khaleel, Yu Zhang, Yidong Du, Xuechao Chen, and Fei Meng  
-> *IEEE Robotics and Automation Letters*
+> *IEEE Robotics and Automation Letters*  
 > project page at: https://2350575870.github.io/force-guided.github.io/
 
 ## Overview
