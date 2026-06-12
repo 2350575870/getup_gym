@@ -331,9 +331,9 @@ pen_base_vel = RewardManagerCfg(
     weight=0.0
 )
 
-rew_knee_dowm = RewardManagerCfg(
+pen_knee_down = RewardManagerCfg(
     func=Unitree_knee_down,
-    weight=0.0
+    weight=1.0
 )
 
 rew_feet_xy_force = RewardManagerCfg(
@@ -444,7 +444,7 @@ def reward_register(reward_manager: RewardManager):
     reward_manager.register_reward(pen_feet_force_unequal)
     reward_manager.register_reward(pen_torso_orientation)
     reward_manager.register_reward(pen_base_vel)
-    reward_manager.register_reward(rew_knee_dowm)
+    reward_manager.register_reward(pen_knee_down)
     reward_manager.register_reward(rew_feet_xy_force)
     reward_manager.register_reward(rew_plevis_lower)
     reward_manager.register_reward(rew_hip_zero)

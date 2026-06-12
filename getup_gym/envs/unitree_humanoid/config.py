@@ -1,7 +1,7 @@
 # Get-up training config for 23-DOF humanoid robot (TianGong)
 from getup_gym.HhdRslRl.basement.base_config.baseconfig import BaseConfig
 from getup_gym.HhdRslRl.basement.base_config.encoder_config import *
-class TianGongGetUpCfg(BaseConfig):
+class HumanoidGetUpCfg(BaseConfig):
     
     class terrain:
         """Terrain friction and restitution parameters"""
@@ -66,7 +66,7 @@ class TianGongGetUpCfg(BaseConfig):
         env_spacing = 3.0           # not used with heightfields/trimeshes
         send_timeouts = True        # (send time out information to the algorithm)
         episode_length_s = 10       # (episode length in seconds)
-        unactuated_timesteps = 20
+        unactuated_timesteps = 30
         test = False
 
         class myself_setting:
@@ -350,11 +350,12 @@ class TianGongGetUpCfg(BaseConfig):
 
         class reward_group_2:
             pen_termination = -200
-            pen_base_orientation_l2 = -2.0
+            pen_base_orientation_l2 = -1.0
             track_base_height_exp = 4.0
             pen_dof_acc_l2 = -2.5e-8
-            pen_action_rate_l2 = -0.01
+            pen_action_rate_l2 = -0.2
             pen_no_fly_l2 = -2.0
+            rew_knee_down = 5.0
             rew_wheel_contact_force = 4.0
 
         class reward_group_3:
@@ -362,9 +363,10 @@ class TianGongGetUpCfg(BaseConfig):
             pen_base_orientation_l2 = -1.0
             pen_torques_l2 = -1.0e-6
             pen_dof_acc_l2 = -2.5e-7
-            pen_action_rate_l2 = -0.006
-            pen_dof_ang_offset_l2 = -0.01
+            pen_action_rate_l2 = -0.01
+            pen_dof_ang_offset_l2 = -0.2
             track_base_height_exp = 6.0
+            rew_knee_down = 3.0
             rew_wheel_contact_force = 4.0
 
         class reward_group_4:
@@ -372,12 +374,13 @@ class TianGongGetUpCfg(BaseConfig):
             track_lin_vel_xy_exp = 7.0
             track_ang_vel_yaw_exp = 4.0
             pen_base_orientation_l2 = -6.0
+            pen_base_vel_l2 = -2.0
             pen_torques_l2 = -1.0e-6
             pen_dof_acc_l2 = -2.5e-7
             pen_dof_vel_l2 = -1.0e-2
-            pen_action_rate_l2 = -0.01
-            pen_dof_ang_offset_l2 = 0.01
-            pen_dof_ang_asymmetry_l2 = 0.01
+            pen_action_rate_l2 = -0.06
+            pen_dof_ang_offset_l2 = -0.6
+            pen_dof_ang_asymmetry_l2 = -0.1
             pen_no_fly_l2 = -2.0
             Unitree_feet_height_var = 0.1
             rew_left_foot_displacement = 1.0
@@ -386,6 +389,7 @@ class TianGongGetUpCfg(BaseConfig):
             track_base_height_exp = 4.0
             rew_wheel_contact_force = 2.0
             pen_feet_distance_l2 = -1.0
+            rew_knee_down = 10.0
             pen_action_smoothness_l2 = -0.02
             pen_joint_power_l2 = -2.0e-3
 
@@ -468,7 +472,7 @@ class TianGongGetUpCfg(BaseConfig):
                 2  # 0: never, 1: last sub-step, 2: all sub-steps (default=2)
             )
     
-class TianGongGetUpPPO(BaseConfig):
+class HumanoidGetUpPPO(BaseConfig):
     """PPO training configuration"""
     seed = 2400                                   # training random seed
     runner_class_name = "TSOnPolicyRunner"        # algorithm class name
@@ -503,7 +507,7 @@ class TianGongGetUpPPO(BaseConfig):
         #TODO: the teacher encoder will be updated use encoder-decoder alg when the teacher encoder is set to MLP-Encoder-Decoder
         #if algorithms = None, the policy will delete all the encoder and only use the basement reinforcement learning
         encoder_training_setting = TrainingAlgConfig(
-            algorithms = "CTS", #"RMA-Teacher", "RMA-TeacherStudent", "CTS", None
+            algorithms = None, #"RMA-Teacher", "RMA-TeacherStudent", "CTS", None
             teacher_encoder_name = "MLP-Encoder", #"MLP-Encoder", "MLP-Encoder-Decoder" "Identity" "UNet" "MLP-UNet"            
             student_encoder_name = "MLP-Encoder", #"MLP-Encoder", "MLP-UNet"
             student_resume_check_point = "",

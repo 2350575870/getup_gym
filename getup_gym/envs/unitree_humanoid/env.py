@@ -14,14 +14,14 @@ from getup_gym.common.math_utils import torch_rand_float
 
 from getup_gym import GETUP_GYM_ROOT_DIR
 from getup_gym.envs.legged_robot import LeggedRobot, get_euler_xyz_tensor
-from getup_gym.envs.unitree_humanoid.config import TianGongGetUpCfg
+from getup_gym.envs.unitree_humanoid.config import HumanoidGetUpCfg
 from getup_gym.common.rewards_init import reward_register
 from getup_gym.common.helpers import class_to_dict
 from getup_gym.common.math_utils import wrap_to_pi, quat_apply_yaw
 
 
-class UnitreeGetUp(LeggedRobot):
-    def __init__(self, cfg: TianGongGetUpCfg, sim_params, physics_engine, sim_device, headless):
+class HumanoidGetUp(LeggedRobot):
+    def __init__(self, cfg: HumanoidGetUpCfg, sim_params, physics_engine, sim_device, headless):
         super().__init__(cfg, sim_params, physics_engine, sim_device, headless)
         self.unactuated_time = self.cfg.env.unactuated_timesteps * 0.02 / self.dt
 
@@ -813,7 +813,7 @@ class UnitreeGetUp(LeggedRobot):
         env_ids_int32 = env_ids.to(dtype=torch.int32)
         back_idx = back_idx.to(dtype=torch.int32)
 
-        self.root_states[env_ids[back_idx], 4:5] = 1.0
+        self.root_states[env_ids[back_idx], 4:5] = -1.0
         self.root_states[env_ids[back_idx], 2:3] += 0.2
 
         self.gym.set_actor_root_state_tensor_indexed(

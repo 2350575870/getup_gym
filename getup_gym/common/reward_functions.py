@@ -236,7 +236,7 @@ def wheel_acc(env: BaseTask):
     return torch.sum(torch.square((env.last_dof_vel[:,[3,7]] - env.dof_vel[:,[3,7]]) / env.dt), dim=1)
 
 def pen_no_fly_l2(env: BaseTask):
-    contacts = env.contact_forces[:, env.feet_indices, 2] > 20.0
+    contacts = env.contact_forces[:, env.feet_indices, 2] > 1.0
     # single_contact = torch.sum(1.0 * contacts, dim=1) == 1
     dual_contact = torch.sum(1.0 * contacts, dim=1) != 2
     return 1.0 * dual_contact

@@ -23,7 +23,7 @@ def play(args):
     env_cfg.noise.add_noise = False
     env_cfg.domain_rand.randomize_friction = False
     env_cfg.domain_rand.push_robots = False
-    env_cfg.rewards.using_pull_up = False
+    env_cfg.rewards.curriculum.using_pull_up = False
     env_cfg.terrain.mesh_type = "plane"
     env_cfg.commands.ranges.lin_vel_x = [0.0, 0.0]
     env_cfg.commands.ranges.ang_vel_yaw = [0.0, 0.0]
